@@ -1,5 +1,7 @@
+import WorkoutForm from '../components/workoutForm';
+
 function App() {
-    return <>Hello world</>;
+  return <WorkoutForm />;
 }
 
 export default App;
