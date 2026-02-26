@@ -28,5 +28,39 @@ export function useExerciseStore() {
     });
   }
 
-  return { exercises, addExercise };
+  function getExercise(id: string): SessionExercise | undefined {
+    return exercises.find((e) => e.id === id);
+  }
+
+  function updateExercise(
+    id: string,
+    name: string,
+    orderIndex: number,
+    movementPattern: MovementPattern
+  ) {
+    setExercises((prev) => {
+      const next = prev.map((e) =>
+        e.id === id ? { ...e, name, orderIndex, movementPattern } : e
+      );
+
+      setExercises(next);
+      return next;
+    });
+  }
+
+  function deleteExercise(id: string) {
+    setExercises((prev) => {
+      const next = prev.filter((e) => e.id !== id);
+      saveExercises(next);
+      return next;
+    });
+  }
+
+  return {
+    exercises,
+    addExercise,
+    getExercise,
+    updateExercise,
+    deleteExercise,
+  };
 }

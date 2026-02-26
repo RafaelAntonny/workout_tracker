@@ -22,5 +22,39 @@ export function useWorkoutStore() {
     });
   }
 
-  return { workouts, addWorkout };
+  function getWorkout(id: string): WorkoutSession | undefined {
+    return workouts.find((w) => w.id === id);
+  }
+
+  function updateWorkout(
+    id: string,
+    name: string,
+    completedAt: string,
+    notes?: string
+  ) {
+    setWorkouts((prev) => {
+      const next = prev.map((w) =>
+        w.id === id
+          ? {
+              ...w,
+              name,
+              completedAt: new Date(completedAt).toISOString(),
+              notes,
+            }
+          : w
+      );
+      saveWorkouts(next);
+      return next;
+    });
+  }
+
+  function deleteWorkout(id: string) {
+    setWorkouts((prev) => {
+      const next = prev.filter((w) => w.id !== id);
+      saveWorkouts(next);
+      return next;
+    });
+  }
+
+  return { workouts, addWorkout, getWorkout, updateWorkout, deleteWorkout };
 }

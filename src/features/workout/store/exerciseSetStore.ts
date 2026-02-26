@@ -29,5 +29,34 @@ export function useExerciseSetStore() {
     });
   }
 
-  return { exerciseSets, addExerciseSet };
+  function getExerciseSetForExercise(sessionExerciseId: string): ExerciseSet[] {
+    return exerciseSets.filter((es) => es.exerciseId === sessionExerciseId);
+  }
+
+  function updateExerciseSet(id: string, repetitions: number, weight: number) {
+    setExerciseSets((prev) => {
+      const next = prev.map((es) =>
+        es.id === id ? { ...es, repetitions, weight } : es
+      );
+
+      setExerciseSets(next);
+      return next;
+    });
+  }
+
+  function deleteExerciseSet(id: string) {
+    setExerciseSets((prev) => {
+      const next = prev.filter((es) => es.id !== id);
+      saveExerciseSets(next);
+      return next;
+    });
+  }
+
+  return {
+    exerciseSets,
+    addExerciseSet,
+    getExerciseSetForExercise,
+    updateExerciseSet,
+    deleteExerciseSet,
+  };
 }

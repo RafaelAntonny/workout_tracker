@@ -10,8 +10,8 @@ export function loadExercises(): SessionExercise[] {
   return JSON.parse(raw) as SessionExercise[];
 }
 
-export function saveExercises(exercies: SessionExercise[]): void {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(exercies));
+export function saveExercises(exercises: SessionExercise[]): void {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(exercises));
 
   return;
 }
