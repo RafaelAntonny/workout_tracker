@@ -39,7 +39,7 @@ export function useExerciseSetStore() {
         es.id === id ? { ...es, repetitions, weight } : es
       );
 
-      setExerciseSets(next);
+      saveExerciseSets(next);
       return next;
     });
   }

@@ -43,7 +43,7 @@ export function useExerciseStore() {
         e.id === id ? { ...e, name, orderIndex, movementPattern } : e
       );
 
-      setExercises(next);
+      saveExercises(next);
       return next;
     });
   }
