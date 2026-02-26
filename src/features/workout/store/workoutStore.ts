@@ -11,7 +11,7 @@ export function useWorkoutStore() {
     const next: WorkoutSession = {
       id: crypto.randomUUID(),
       name: name,
-      completedAt: completedAt,
+      completedAt: new Date(completedAt).toISOString(),
       notes: notes,
     };
 

@@ -4,8 +4,14 @@ import { useWorkoutStore } from '../features/workout/store/workoutStore';
 const WorkoutForm = () => {
   const { addWorkout } = useWorkoutStore();
 
+  function dateTimeLocalNow(): string {
+    const d = new Date();
+    const local = new Date(d.getTime() - d.getTimezoneOffset() * 60_000);
+    return local.toISOString().slice(0, 16);
+  }
+
   const [name, setName] = useState('');
-  const [completedAt, setCompletedAt] = useState('');
+  const [completedAt, setCompletedAt] = useState(() => dateTimeLocalNow());
   const [notes, setNotes] = useState('');
 
   function handleSubmit(e: React.SubmitEvent) {
@@ -33,7 +39,7 @@ const WorkoutForm = () => {
         <p>
           <label htmlFor="completedAt">Completed At:</label>
           <input
-            type="text"
+            type="datetime-local"
             id="completedAt"
             value={completedAt}
             onChange={(e) => setCompletedAt(e.target.value)}

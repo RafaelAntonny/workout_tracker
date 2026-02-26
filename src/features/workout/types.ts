@@ -5,7 +5,7 @@ export type WorkoutSession = {
   notes?: string;
 };
 
-type MovementPattern = 'push' | 'pull' | 'squat' | 'hinge' | 'lunge';
+export type MovementPattern = 'push' | 'pull' | 'squat' | 'hinge' | 'lunge';
 
 export type SessionExercise = {
   id: string;
